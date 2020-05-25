@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             mc:Ignorable="d"
+             x:Class="CoreApp.Views.PrincipalView.EmployeesPage"
+             Title="Empleados">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0"
+                        Grid.ColumnSpan="4"
+                        CornerRadius="10"
+                        Text="Registrar empleado"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        ImageSource="ic_addemployee"
+                        HeightRequest="70"
+                        Margin="20"
+                        Command ="{Binding GoToRegisterEmployeePageCommand}"
+                        BackgroundColor="Green">
+                </Button>
+
+                <Frame Grid.Row="1" 
+                       Grid.ColumnSpan="4"
+                       BackgroundColor="CornflowerBlue">
+
+                    <Label Text="Listado de empleados"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="50,0,0,0">
+                    </Label>
+                </Frame>
+
+                <Image Grid.Row="1" 
+                       Margin="0,0,30,0"
+                       Source="ic_list">
+                </Image>
+
+                <ListView Grid.Row="2"
+                          Grid.ColumnSpan="4"
+                          IsPullToRefreshEnabled="True"
+                          SelectionMode="Single"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding SelectedEmployee,Mode=TwoWay}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="5" Margin="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="ic_emp"
+                                       HeightRequest="50">
+                                    </Image>
+
+                                    <Label FontSize="17" TextColor="Black" Grid.ColumnSpan="2" Grid.Column="2">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Name}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding LastName}"/>
+                                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                                <Span Text="{Binding IdCard,StringFormat='Cedula: {0}'}"/>
+                                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                                <Span Text="{Binding Schedule,StringFormat='Horario: {0}'}"/>
+                                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                                <Span Text="{Binding Salary,StringFormat='Salario: RD${0}'}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                            
+                            
+                            </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                               
+            </Grid>
+            
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

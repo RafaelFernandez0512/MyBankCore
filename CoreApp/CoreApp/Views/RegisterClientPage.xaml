@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CoreApp.Views.RegisterClientPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text="Create a client account"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   FontSize="20"/>
+                <Entry Text="{Binding Client.Name}"
+                       Placeholder="Name"
+                   Grid.Row="1"
+                   Grid.Column="0"/>
+                <Entry Text="{Binding Client.LastName}"
+                         Placeholder="Lastname"
+                   Grid.Row="1"
+                   Grid.Column="1"/>
+                <Entry Text="{Binding Client.Email}"
+                         Placeholder="Email"
+                        Keyboard="Email"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="2"/>
+                <Label Text="Cedula"
+                       Grid.Row="3"
+                       VerticalOptions="StartAndExpand"
+                       Grid.Column="0"/>
+                <Entry Text="{Binding Client.IdCard}"
+                       
+                         Placeholder="ID Card"
+                         Keyboard="Numeric"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="2"/>
+                <DatePicker Date="{Binding Client.Date_Time}"
+                   Grid.Row="4"
+                   Grid.Column="1"/>
+                <Picker ItemsSource="{Binding Genders}"
+                        SelectedItem="{Binding SelectGender}"
+                        ItemDisplayBinding="{Binding Name}"
+                        Title="Selecciona tu genero"
+                   Grid.Row="4"
+                   Grid.Column="0"/>
+                <Entry Text="{Binding Client.JobCompany}"
+                         Placeholder="Work company"
+                   Grid.Row="5"
+                   Grid.ColumnSpan="2"/>
+
+                <Entry Text="{Binding Client.WorkStation}"
+                       Placeholder="Job Position"
+                   Grid.Row="6"
+                   Grid.Column="0"/>
+                <Label Text="Sueldo"
+                       Grid.Row="6"
+                       Grid.Column="1"
+                       VerticalOptions="StartAndExpand"/>
+                <Entry Text="{Binding Client.Salary}"
+                       Placeholder="Salary"
+                   Grid.Row="6"
+                   Grid.Column="1"/>
+                <Label Text="Account"
+                   FontSize="20" 
+                   Grid.Row="7"/>
+                <Entry Text="{Binding Account.Account}"
+                       IsEnabled="True"
+                       Placeholder="Number"
+                       Keyboard="Numeric"
+                   Grid.Row="8"
+                   Grid.Column="0"/>
+                <Label Text="Balance"
+                     Grid.Row="8"
+                   Grid.Column="1"
+                       VerticalOptions="StartAndExpand"/>
+                <Entry Text="{Binding Account.Balance}"
+                   Grid.Row="8"
+                       Placeholder="Balance"
+                         Keyboard="Numeric"
+                   Grid.Column="1"/>
+
+                <Picker ItemsSource="{Binding AccountTypes}"
+                        Title="Select account"
+                        SelectedItem="{Binding SelectAccount}"
+                        ItemDisplayBinding="{Binding Name}" 
+                   Grid.Row="9"
+                   Grid.ColumnSpan="2"/>
+         
+                
+                <Button Text="Create Account"
+                        Command="{Binding SaveCommand}"
+                        Grid.Row="10"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="30"/>
+
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

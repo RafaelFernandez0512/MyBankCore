@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CoreApp.Views.TemplateControls.CustomCollectionView"
+             xmlns:system="clr-namespace:System;assembly=netstandard" xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Name="custom">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="LabelInfoKey">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <CollectionView ItemsSource="{Binding ItemSources}"
+                            BindingContext="{x:Reference custom}"
+                        x:Name="ListContent"
+                           x:FieldModifier="Public">
+            <CollectionView.EmptyView>
+                <StackLayout Padding="10">
+                    <Label Text="{Binding Empty}"
+                           FontSize="30"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Image Source="ImageNotFount.png"
+                           Aspect="AspectFill"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           Margin="30,0,0,0"
+                           
+                           HorizontalOptions="Center"/>
+
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout VerticalItemSpacing="10"
+                                 Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <pancakeView:PancakeView BackgroundColor="#011747" 
+                                              CornerRadius="20" 
+                                              Margin="15"
+                                              HasShadow="True">
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="defaultUser" HeightRequest="20" WidthRequest="80" Grid.Row="0" Grid.Column="0"/>
+                            <Label Grid.Row="0" Grid.Column="1" 
+                                   VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Name}" Style="{StaticResource LabelInfoKey}" TextColor="White"/>
+                                        <Span Text=" "/>
+                                        <Span Text="{Binding LastName}" Style="{StaticResource LabelInfoKey}" TextColor="White"/>
+                                        <Span Text="{x:Static system:Environment.NewLine}"/>
+                                        <Span Text="{Binding IdCard,StringFormat='Cedula: {0}'}" TextColor="White"/>
+                                        <Span Text="{x:Static system:Environment.NewLine}"/>
+                                        <Span Text="{Binding Account,StringFormat='Account: {0}'}" TextColor="White"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </pancakeView:PancakeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentView.Content>
+</ContentView>

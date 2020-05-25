@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                  mc:Ignorable="d"
+             x:Class="CoreApp.Views.MenuMasterDetailPage"
+                 xmlns:system="clr-namespace:System;assembly=netstandard">
+    <MasterDetailPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="LabelKeyPage">
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style TargetType="NavigationPage">
+                <Setter Property="NavigationPage.BarBackgroundColor" Value="#333E47"/>
+            </Style>
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
+    
+        <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+
+            <CollectionView ItemsSource="{Binding Pages}"
+                            SelectedItem="{Binding SelectPage}"
+                            SelectionMode="Single"
+                            BackgroundColor="#333E47">
+                <CollectionView.Header>
+                    <pancakeview:PancakeView 
+                                              >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="Administrador"
+                                   Style="{StaticResource LabelKeyPage}"
+                                   HorizontalOptions="Center"
+                                   />
+                            <Label Text="{Binding NamePage}"
+                                   Style="{StaticResource LabelKeyPage}"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+                            <Label BackgroundColor="LightGray"
+                                   Grid.Row="1"/>
+                        </Grid>
+                    </pancakeview:PancakeView>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image BackgroundColor="Red"
+                                   Grid.Column="0"/>
+                            <Label Text="{Binding NamePage}"
+                                      Grid.Column="1"
+                                   Style="{StaticResource LabelKeyPage}"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <pancakeview:PancakeView 
+                                             VerticalOptions="EndAndExpand"
+                                             Margin="10">
+                        <Label Text="Salir"
+                               Style="{StaticResource LabelKeyPage}"
+                               />
+                    </pancakeview:PancakeView>
+                </CollectionView.Footer>
+            </CollectionView>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

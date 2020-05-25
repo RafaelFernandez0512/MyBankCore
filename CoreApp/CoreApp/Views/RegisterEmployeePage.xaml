@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CoreApp.Views.RegisterEmployeePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Entry Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="5"
+                       Text="{Binding Employee.Nombre}"
+                       Placeholder="Name">
+                </Entry>
+
+                <Entry Grid.Row="0"
+                       Grid.Column="1"
+                       Margin="5"
+                       Text="{Binding Employee.Apellido}"
+                       Placeholder="Lastname">
+                </Entry>
+
+                <Entry Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding Employee.Email}"
+                       Placeholder="Email">
+                </Entry>
+
+                <Entry Grid.Row="2"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding Employee.Cedula}"
+                       Placeholder="ID Card">
+                </Entry>
+
+                <DatePicker Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="5"
+                            Date="{Binding Employee.Fecha}">
+                </DatePicker>
+
+                <Picker Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="5"
+                        Title="Gender"
+                        ItemsSource="{Binding Genders}"
+                        SelectedItem="{Binding SelectGender}"
+                        ItemDisplayBinding="{Binding Name}">
+                </Picker>
+
+                <Entry  Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="5"
+                        Text="{Binding Employee.IdDepartamento}"
+                        Keyboard="Numeric"
+                        Placeholder="Work area ID">
+                </Entry>
+
+                <Picker Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="5"
+                        Title="Position"
+                        ItemsSource="{Binding EmployeeTypes}"
+                        SelectedItem="{Binding SelectEmployeeType}"
+                        ItemDisplayBinding="{Binding EmployeeTypeName}">
+                </Picker>
+
+                <Picker Grid.Row="5"
+                        Grid.Column="0"
+                        Margin="5"
+                        Title="Schedule"
+                        ItemsSource="{Binding Schedules}"
+                        SelectedItem="{Binding SelectSchedule}"
+                        ItemDisplayBinding="{Binding ScheduleTime}">
+                </Picker>
+
+                <Entry Grid.Row="5"
+                       Grid.Column="1"
+                       Margin="5"
+                       Text="{Binding Employee.Sueldo}"
+                       Placeholder="Salary">
+                </Entry>
+
+                <Entry Grid.Row="6"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding Employee.Perfil}"
+                       Placeholder="Employee's profile">
+                </Entry>
+
+                <Button Grid.Row="7"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        CornerRadius="30"
+                        FontAttributes="Bold"
+                        Text="Register employee"
+                        Command="{Binding SaveEmployeeCommand}">
+                </Button> 
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="coredbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'coredb.dbo.Log4Core' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Log4Core">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateLog" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="MessageLog" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateLog" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MessageLog" Type="varchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="TLSCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="EmpresaTrabajo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PuestoTrabajo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Sueldo" Type="float" Nullable="false" />
+          <Property Name="Cuenta" Type="int" />
+          <Property Name="Fecha_Creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TLSCuenta">
+          <Key>
+            <PropertyRef Name="IDCuenta" />
+          </Key>
+          <Property Name="IDCuenta" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="bigint" Nullable="false" />
+          <Property Name="TipoCuenta" Type="nvarchar" MaxLength="100" />
+          <Property Name="Balance" Type="float" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TLSEmpleado">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cedula" Type="bigint" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="datetime" />
+          <Property Name="IdDepartamento" Type="int" Nullable="false" />
+          <Property Name="Puesto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Horario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sueldo" Type="float" Nullable="false" />
+          <Property Name="Perfil" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TLSMovimientos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="MontoTransaccion" Type="float" Nullable="false" />
+          <Property Name="IDCuenta" Type="int" Nullable="false" />
+          <Property Name="Informacion" Type="nvarchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="TLSTransaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="MontoTransaccion" Type="float" Nullable="false" />
+          <Property Name="IDCuentaEmisor" Type="int" Nullable="false" />
+          <Property Name="IDCuentaReceptor" Type="int" Nullable="false" />
+          <Property Name="TipoTransaccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TLSUsuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cedula" Type="bigint" Nullable="false" />
+          <Property Name="TipoCuenta" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="datetime" />
+        </EntityType>
+        <Function Name="DeleteCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numeroCuenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="DeleteUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Apellido" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="EmpresaTrabajo" Type="nvarchar" Mode="In" />
+          <Parameter Name="PuestoTrabajo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sueldo" Type="float" Mode="In" />
+          <Parameter Name="cuenta" Type="int" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="Sexo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numeroCuenta" Type="int" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="Balance" Type="float" Mode="In" />
+          <Parameter Name="TipoCuenta" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Apellido" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="Puesto" Type="nvarchar" Mode="In" />
+          <Parameter Name="Horario" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sueldo" Type="float" Mode="In" />
+          <Parameter Name="Perfil" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sexo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thread" Type="varchar" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="In" />
+          <Parameter Name="Exception" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertMovimientoTransaccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MontoTransaccion" Type="float" Mode="In" />
+          <Parameter Name="IDCuentaEmisor" Type="int" Mode="In" />
+          <Parameter Name="IDCuentaReceptor" Type="int" Mode="In" />
+          <Parameter Name="Informacion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertTransaccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MontoTransaccion" Type="float" Mode="In" />
+          <Parameter Name="IDCuentaEmisor" Type="int" Mode="In" />
+          <Parameter Name="IDCuentaReceptor" Type="int" Mode="In" />
+          <Parameter Name="TipoTransaccion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="TipoCuenta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Apellido" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="EmpresaTrabajo" Type="nvarchar" Mode="In" />
+          <Parameter Name="PuestoTrabajo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sueldo" Type="float" Mode="In" />
+          <Parameter Name="cuenta" Type="int" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="UpdateCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numeroCuenta" Type="int" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="Balance" Type="float" Mode="In" />
+          <Parameter Name="TipoCuenta" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Apellido" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="IdDepartamento" Type="int" Mode="In" />
+          <Parameter Name="Puesto" Type="nvarchar" Mode="In" />
+          <Parameter Name="Horario" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sueldo" Type="float" Mode="In" />
+          <Parameter Name="Perfil" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cedula" Type="bigint" Mode="In" />
+          <Parameter Name="TipoCuenta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="coredbModelStoreContainer">
+          <EntitySet Name="TLSCliente" EntityType="Self.TLSCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLSCuenta" EntityType="Self.TLSCuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLSEmpleado" EntityType="Self.TLSEmpleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLSMovimientos" EntityType="Self.TLSMovimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLSTransaccion" EntityType="Self.TLSTransaccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TLSUsuario" EntityType="Self.TLSUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log4Core" EntityType="Self.Log4Core" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Log4Core].[Id] AS [Id], 
+    [Log4Core].[DateLog] AS [DateLog], 
+    [Log4Core].[Thread] AS [Thread], 
+    [Log4Core].[MessageLog] AS [MessageLog], 
+    [Log4Core].[Exception] AS [Exception]
+    FROM [dbo].[Log4Core] AS [Log4Core]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="coredbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TLSCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmpresaTrabajo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PuestoTrabajo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sueldo" Type="Double" Nullable="false" />
+          <Property Name="Cuenta" Type="Int32" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TLSCuenta">
+          <Key>
+            <PropertyRef Name="IDCuenta" />
+          </Key>
+          <Property Name="IDCuenta" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="Int64" Nullable="false" />
+          <Property Name="TipoCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Double" Nullable="false" />
+          <Property Name="FechaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TLSEmpleado">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cedula" Type="Int64" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Horario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sueldo" Type="Double" Nullable="false" />
+          <Property Name="Perfil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TLSMovimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoTransaccion" Type="Double" Nullable="false" />
+          <Property Name="IDCuenta" Type="Int32" Nullable="false" />
+          <Property Name="Informacion" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TLSTransaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoTransaccion" Type="Double" Nullable="false" />
+          <Property Name="IDCuentaEmisor" Type="Int32" Nullable="false" />
+          <Property Name="IDCuentaReceptor" Type="Int32" Nullable="false" />
+          <Property Name="TipoTransaccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TLSUsuario">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cedula" Type="Int64" Nullable="false" />
+          <Property Name="TipoCuenta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Log4Core">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateLog" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="MessageLog" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateLog" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MessageLog" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="coredbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TLSClientes" EntityType="Self.TLSCliente" />
+          <EntitySet Name="TLSCuentas" EntityType="Self.TLSCuenta" />
+          <EntitySet Name="TLSEmpleadoes" EntityType="Self.TLSEmpleado" />
+          <EntitySet Name="TLSMovimientos" EntityType="Self.TLSMovimiento" />
+          <EntitySet Name="TLSTransaccions" EntityType="Self.TLSTransaccion" />
+          <EntitySet Name="TLSUsuarios" EntityType="Self.TLSUsuario" />
+          <EntitySet Name="Log4Core" EntityType="Self.Log4Core" />
+          <FunctionImport Name="DeleteCliente">
+            <Parameter Name="Cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCuenta">
+            <Parameter Name="numeroCuenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteEmpleado">
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUsuario">
+            <Parameter Name="Cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCliente">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="EmpresaTrabajo" Mode="In" Type="String" />
+            <Parameter Name="PuestoTrabajo" Mode="In" Type="String" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="cuenta" Mode="In" Type="Int32" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCuenta">
+            <Parameter Name="numeroCuenta" Mode="In" Type="Int32" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="Balance" Mode="In" Type="Double" />
+            <Parameter Name="TipoCuenta" Mode="In" Type="String" />
+            <Parameter Name="FechaActualizacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmpleados">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="Puesto" Mode="In" Type="String" />
+            <Parameter Name="Horario" Mode="In" Type="String" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Perfil" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLogs">
+            <Parameter Name="Thread" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Exception" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertMovimientoTransaccion">
+            <Parameter Name="MontoTransaccion" Mode="In" Type="Double" />
+            <Parameter Name="IDCuentaEmisor" Mode="In" Type="Int32" />
+            <Parameter Name="IDCuentaReceptor" Mode="In" Type="Int32" />
+            <Parameter Name="Informacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTransaccion">
+            <Parameter Name="MontoTransaccion" Mode="In" Type="Double" />
+            <Parameter Name="IDCuentaEmisor" Mode="In" Type="Int32" />
+            <Parameter Name="IDCuentaReceptor" Mode="In" Type="Int32" />
+            <Parameter Name="TipoTransaccion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUsuario">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="TipoCuenta" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCliente">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="EmpresaTrabajo" Mode="In" Type="String" />
+            <Parameter Name="PuestoTrabajo" Mode="In" Type="String" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="cuenta" Mode="In" Type="Int32" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCuenta">
+            <Parameter Name="numeroCuenta" Mode="In" Type="Int32" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="Balance" Mode="In" Type="Double" />
+            <Parameter Name="TipoCuenta" Mode="In" Type="String" />
+            <Parameter Name="FechaActualizacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEmpleados">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDepartamento" Mode="In" Type="Int32" />
+            <Parameter Name="Puesto" Mode="In" Type="String" />
+            <Parameter Name="Horario" Mode="In" Type="String" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Perfil" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUsuario">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="Int64" />
+            <Parameter Name="TipoCuenta" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="coredbModelStoreContainer" CdmEntityContainer="coredbEntities">
+          <EntitySetMapping Name="TLSClientes">
+            <EntityTypeMapping TypeName="coredbModel.TLSCliente">
+              <MappingFragment StoreEntitySet="TLSCliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="EmpresaTrabajo" ColumnName="EmpresaTrabajo" />
+                <ScalarProperty Name="PuestoTrabajo" ColumnName="PuestoTrabajo" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLSCuentas">
+            <EntityTypeMapping TypeName="coredbModel.TLSCuenta">
+              <MappingFragment StoreEntitySet="TLSCuenta">
+                <ScalarProperty Name="IDCuenta" ColumnName="IDCuenta" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="TipoCuenta" ColumnName="TipoCuenta" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLSEmpleadoes">
+            <EntityTypeMapping TypeName="coredbModel.TLSEmpleado">
+              <MappingFragment StoreEntitySet="TLSEmpleado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="Perfil" ColumnName="Perfil" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLSMovimientos">
+            <EntityTypeMapping TypeName="coredbModel.TLSMovimiento">
+              <MappingFragment StoreEntitySet="TLSMovimientos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="MontoTransaccion" ColumnName="MontoTransaccion" />
+                <ScalarProperty Name="IDCuenta" ColumnName="IDCuenta" />
+                <ScalarProperty Name="Informacion" ColumnName="Informacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLSTransaccions">
+            <EntityTypeMapping TypeName="coredbModel.TLSTransaccion">
+              <MappingFragment StoreEntitySet="TLSTransaccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="MontoTransaccion" ColumnName="MontoTransaccion" />
+                <ScalarProperty Name="IDCuentaEmisor" ColumnName="IDCuentaEmisor" />
+                <ScalarProperty Name="IDCuentaReceptor" ColumnName="IDCuentaReceptor" />
+                <ScalarProperty Name="TipoTransaccion" ColumnName="TipoTransaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TLSUsuarios">
+            <EntityTypeMapping TypeName="coredbModel.TLSUsuario">
+              <MappingFragment StoreEntitySet="TLSUsuario">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="TipoCuenta" ColumnName="TipoCuenta" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log4Core">
+            <EntityTypeMapping TypeName="coredbModel.Log4Core">
+              <MappingFragment StoreEntitySet="Log4Core">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateLog" ColumnName="DateLog" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="MessageLog" ColumnName="MessageLog" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteCliente" FunctionName="coredbModel.Store.DeleteCliente" />
+          <FunctionImportMapping FunctionImportName="DeleteCuenta" FunctionName="coredbModel.Store.DeleteCuenta" />
+          <FunctionImportMapping FunctionImportName="DeleteEmpleado" FunctionName="coredbModel.Store.DeleteEmpleado" />
+          <FunctionImportMapping FunctionImportName="DeleteUsuario" FunctionName="coredbModel.Store.DeleteUsuario" />
+          <FunctionImportMapping FunctionImportName="InsertCliente" FunctionName="coredbModel.Store.InsertCliente" />
+          <FunctionImportMapping FunctionImportName="InsertCuenta" FunctionName="coredbModel.Store.InsertCuenta" />
+          <FunctionImportMapping FunctionImportName="InsertEmpleados" FunctionName="coredbModel.Store.InsertEmpleados" />
+          <FunctionImportMapping FunctionImportName="InsertLogs" FunctionName="coredbModel.Store.InsertLogs" />
+          <FunctionImportMapping FunctionImportName="InsertMovimientoTransaccion" FunctionName="coredbModel.Store.InsertMovimientoTransaccion" />
+          <FunctionImportMapping FunctionImportName="InsertTransaccion" FunctionName="coredbModel.Store.InsertTransaccion" />
+          <FunctionImportMapping FunctionImportName="InsertUsuario" FunctionName="coredbModel.Store.InsertUsuario" />
+          <FunctionImportMapping FunctionImportName="UpdateCliente" FunctionName="coredbModel.Store.UpdateCliente" />
+          <FunctionImportMapping FunctionImportName="UpdateCuenta" FunctionName="coredbModel.Store.UpdateCuenta" />
+          <FunctionImportMapping FunctionImportName="UpdateEmpleados" FunctionName="coredbModel.Store.UpdateEmpleados" />
+          <FunctionImportMapping FunctionImportName="UpdateUsuario" FunctionName="coredbModel.Store.UpdateUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

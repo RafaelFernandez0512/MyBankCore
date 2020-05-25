@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CoreApp.Views.RegisterUserPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Entry Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding User.Username}"
+                       Placeholder="Username">
+                </Entry>
+
+                <Entry Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding User.Contraseña}"
+                       IsPassword="True"
+                       Placeholder="Password">
+                </Entry>
+
+                <Entry Grid.Row="2"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding User.Email}"
+                       Placeholder="Email">
+                </Entry>
+
+                <Entry Grid.Row="3"
+                       Grid.ColumnSpan="2"
+                       Margin="5"
+                       Text="{Binding User.Cedula}"
+                       Placeholder="ID Card">
+                </Entry>
+
+                <Picker Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="5"
+                        Title="Account type"
+                        ItemsSource="{Binding AccountTypes}"
+                        SelectedItem="{Binding SelectAccountType}"
+                        ItemDisplayBinding="{Binding Name}">
+                </Picker>
+
+                <DatePicker Grid.Row="4"
+                            Grid.Column="1"
+                            Margin="5"
+                            Date="{Binding User.Fecha}">
+                </DatePicker>
+
+                <Button Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        Margin="5"
+                        CornerRadius="30"
+                        FontAttributes="Bold"
+                        Text="Register user"
+                        Command="{Binding SaveUserCommand}">
+                </Button>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
